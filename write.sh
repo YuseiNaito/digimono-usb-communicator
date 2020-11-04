@@ -15,11 +15,10 @@ do
         cp ./$filename $mount_point/
         rm ./$filename
         echo 'Completed!'
-      else
-        echo 'Please remove old files.'
       fi
-
       touch ./$filename
+    else
+      echo 'Please remove old files.'
     fi
 
     umount $mount_point
