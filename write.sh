@@ -2,17 +2,27 @@
 
 mount_point=/mnt/usb1
 device=/dev/sdb1
+filename=sensor_a.csv
 
-mkdir $mount_point
-mount $device $mount_point
+while :
+do
+  if test -e $device; then
+    mkdir $mount_point
+    mount $device $mount_point
 
-ls $mount_point
+    if ! test -f $mount_point/$filename; then
+      if test -f ./$filename; then
+        ls $mount_point
+        cp ./$filename $mount_point/
+        rm ./$filename
+      fi
 
-if test -f sensor_a.csv; then
-  cp ./sensor_a.csv $mount_point/
-  rm sensor_a.csv
-fi
+      touch ./$filename
+    fi
 
-umount $mount_point
-rm -rf $mount_point
-touch sensor_a.csv
+    umount $mount_point
+    rm -rf $mount_point
+
+    sleep 1
+  fi
+done
