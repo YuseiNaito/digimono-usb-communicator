@@ -12,9 +12,11 @@ do
 
     if ! test -f $mount_point/$filename; then
       if test -f ./$filename; then
-        ls $mount_point
         cp ./$filename $mount_point/
         rm ./$filename
+        echo 'Completed!'
+      else
+        echo 'Please remove old files.'
       fi
 
       touch ./$filename
