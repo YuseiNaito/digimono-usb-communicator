@@ -2,10 +2,10 @@
 
 # マウントするために作るディレクトリ
 mount_point=/mnt/usb1
-# デバイス(USBメモリなど)の場所
+# デバイス(USBメモリなど)のパス
 device=/dev/sdb1
-# 取り出したいデータのファイル名
-filename=sensor_a.csv
+# 取り出したいデータのパス
+file=sensor_a.csv
 # 書き込みが完了したか
 finished=false
 
@@ -21,17 +21,17 @@ do
     mkdir $mount_point
     mount $device $mount_point
 
-    if ! test -f $mount_point/$filename; then
+    if ! test -f $mount_point/$file; then
       # デバイスに同名ファイルが存在しなければ
-      if test -f ./$filename; then
+      if test -f $file; then
         # データが存在すればばデバイスに移動
-        cp ./$filename $mount_point/
-        rm ./$filename
+        cp $file $mount_point/
+        rm $file
         finished=true
         echo 'Completed!'
       fi
       # 新規ファイル作成
-      touch ./$filename
+      touch ./$file
     else
       # デバイスに同名ファイルが存在したら書き込まない
       echo 'Please remove old files.'
