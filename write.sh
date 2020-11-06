@@ -43,7 +43,7 @@ do
     # アンマウントし、マウント先のディレクトリを削除
     umount $mount_point
     rm -rf $mount_point
-
-    sleep 1
   fi
+
+  sleep 1
 done
