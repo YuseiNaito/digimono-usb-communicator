@@ -18,7 +18,10 @@ do
 
   if test -e $device -a ! $finished; then
     # デバイスが存在し、まだ書き込まれていなければマウント
-    mkdir $mount_point
+    if test -d $mount_point; then
+      # マウントポイントが存在しなければ作成
+      mkdir $mount_point
+    fi
     mount $device $mount_point
 
     if ! test -f $mount_point/$file; then
