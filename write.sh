@@ -34,7 +34,7 @@ do
         echo 'Completed!'
       fi
       # 新規ファイル作成
-      touch ./$file
+      touch $file
     else
       # デバイスに同名ファイルが存在したら書き込まない
       echo 'Please remove old files.'
