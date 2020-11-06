@@ -4,9 +4,15 @@ mount_point=/mnt/usb1
 device=/dev/sdb1
 filename=sensor_a.csv
 
+finished=false
+
 while :
 do
-  if test -e $device; then
+  if ! test -e $device; then
+    finished=false
+  fi
+
+  if test -e $device -a !$finished; then
     mkdir $mount_point
     mount $device $mount_point
 
@@ -14,6 +20,7 @@ do
       if test -f ./$filename; then
         cp ./$filename $mount_point/
         rm ./$filename
+        finished=true
         echo 'Completed!'
       fi
       touch ./$filename
