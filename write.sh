@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# マウントするために作るディレクトリ
+# マウントポイント
 mount_point=/mnt/usb1
 # デバイス(USBメモリなど)のパス
 device=/dev/sdb1
@@ -40,7 +40,7 @@ do
       echo 'Please remove old files.'
     fi
 
-    # アンマウントし、マウント先のディレクトリを削除
+    # アンマウントし、マウントポイントを削除
     umount $mount_point
     rm -rf $mount_point
   fi
