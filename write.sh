@@ -9,9 +9,6 @@ finished=false
 
 while :
 do
-  read -p "error>" error
-  python BME280/make_data.py $error
-
   sleep 1
 
   if [ ! -e $device ]; then
@@ -20,7 +17,7 @@ do
     continue
   fi
 
-  if [ "$finished" = false ]; then
+  if ! $finished; then
     # デバイスが存在し、まだ書き込まれていなければマウント
     if [ ! -d $mount_point ]; then
       # マウントポイントが存在しなければ作成
@@ -33,21 +30,16 @@ do
     do
       if [ ! -f $mount_point/$file ]; then
         # デバイスに同名ファイルが存在しなければ
-        if [ -f $file ]; then
-          # データが存在すればばデバイスに移動
-          cp $file $mount_point/
-	  rm $file
-          finished=true
-          echo 'Completed!'
-        fi
-        # 新規ファイル作成
-        touch $file
-       else
-         # デバイスに同名ファイルが存在したら書き込まない
-         echo 'Please remove old files.'
-       fi
+        cp $file $mount_point/
+	rm $file
+        echo "\nCompleted!"
+      else
+        # デバイスに同名ファイルが存在したら書き込まない
+        echo "\nPlease remove old files."
+      fi
     done
 
+    finished=true
     # アンマウントし、マウントポイントを削除
     umount $mount_point
     rm -rf $mount_point
