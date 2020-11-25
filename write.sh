@@ -9,7 +9,8 @@ finished=false
 
 while :
 do
-  python ../BME280/Python27/bme280_sample.py
+  read -p "error>" error
+  python BME280/make_data.py $error
 
   sleep 1
 
