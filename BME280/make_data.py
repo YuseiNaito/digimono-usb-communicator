@@ -76,7 +76,7 @@ def readData():
 	h = compensate_H(hum_raw)
         with open('sensor_a.csv', 'a') as f:
           writer = csv.writer(f, lineterminator='\n') # 改行コード（\n）を指定しておく
-          writer.writerow([datetime.datetime.now(), t, p, h, args[1]])
+          writer.writerow([datetime.datetime.now(), t, p / 100.0, h, args[1]])
 
 def compensate_P(adc_P):
 	global  t_fine
