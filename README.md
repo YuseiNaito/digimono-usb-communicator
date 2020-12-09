@@ -13,7 +13,7 @@
 ### 出力
  * `write.sh` の標準出力、標準エラー出力は `/dev/null` に捨てられます。
 
-## make_data.py
+## BME280/make_data.py
 ### 設定
  * `file_name` に任意のファイル名を指定します。(デフォルトは `sensor_a.csv`)
  * 必要があれば `bus_number` , `i2c_address` の設定を変更します。
