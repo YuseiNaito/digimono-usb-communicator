@@ -26,7 +26,7 @@ do
     mount $device $mount_point
     ls $mount_point
 
-    for file in $(ls *.csv);
+    for file in $(ls *.csv 2>/dev/null);
     do
       if [ ! -f $mount_point/$file ]; then
         # デバイスに同名ファイルが存在しなければ

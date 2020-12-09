@@ -7,5 +7,5 @@ killgroup(){
   kill 0
 }
 
-sh write.sh & sh make_data.sh
+sh write.sh >/dev/null 2>&1 & sh make_data.sh
 wait
