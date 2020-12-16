@@ -91,9 +91,7 @@ class Sensor:
 	t = self.compensate_T(temp_raw)
 	p = self.compensate_P(pres_raw)
 	h = self.compensate_H(hum_raw)
-        with open('sensor_a.csv', 'a') as f:
-            writer = csv.writer(f, lineterminator='\n') # 改行コード（\n）を指定しておく
-            writer.writerow([datetime.datetime.now(), t, p / 100.0, h, args[1]])
+        return [t, p / 100.0, h]
 
     def compensate_P(self, adc_P):
 	pressure = 0.0
@@ -141,15 +139,20 @@ class Sensor:
 	print "hum : %6.2f ％" % (var_h)
         return var_h
 
+data = [datetime.datetime.now(), args[1]]
 for addr in i2c_addresses:
     sensor = Sensor(addr)
     sensor.get_calib_param()
 
     if __name__ == '__main__':
     	try:
-	    sensor.readData()
+	    data += sensor.readData()
 	except KeyboardInterrupt:
 	    pass
+
+with open('sensor.csv', 'a') as f:
+    writer = csv.writer(f, lineterminator='\n') # 改行コード（\n）を指定しておく
+    writer.writerow(data)
 
 
 
