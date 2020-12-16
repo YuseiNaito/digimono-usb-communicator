@@ -16,7 +16,7 @@
 ## BME280/make_data.py
 ### 設定
  * `file_name` に任意のファイル名を指定します。(デフォルトは `sensor_a.csv`)
- * 必要があれば `bus_number` , `i2c_address` の設定を変更します。
+ * 必要があれば `bus_number` , `i2c_addresses` の設定を変更します。
 
 ## make_data.sh
 `BME280/make_data.py` を実行し、CSV ファイルに値を出力します。形式は以下の通りです。
